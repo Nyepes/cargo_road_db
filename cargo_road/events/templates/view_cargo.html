@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1>View Cargo</h1>
+	<br>
+	<br>
+		{% for cargo in cargoList %}
+		<div class="card">
+		 <div class="card-header"> cargo.shipment
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">{{cargo.truck}}</h5>
+		    <p class="card-text">{{cargo.pickup_date}}</p>
+		    <br>
+		    <p>
+				<strong>Fedex Settlement: </strong>{{cargo.fedex_settlement}}<br>
+				<strong>Driver Settlement: </strong> {{cargo.driver_settlement}}<br>
+				<strong>Load miles: </strong> {{cargo.load_miles}}<br>
+				<strong>Loaded Income: </strong> {{cargo.loaded_income}}<br>			
+		    </p>
+		    <a href="#" class="btn btn-primary">More info</a>
+		 	</div>
+			</div>
+
+			
+		{% endfor %}	
+{% endblock %}
