@@ -1,3 +1,4 @@
+from logging import PlaceHolder
 from django import forms
 from django.forms import ModelForm
 from .models import Cargo, Truck, FedexSettlement
@@ -66,13 +67,13 @@ class CargoForm(ModelForm):
 			'state': "State"
 		}
 		widgets = {
-			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True', }),
+			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True' }),
 			#Cambiar a Select y cambiar de nombre a id en views
-			'truck': forms.TextInput(attrs={'class':'form-control','required': 'True'}),
+			'truck': forms.Select(attrs={'class':'form-control','required': 'True', 'placeholder':'Truck'}),
 			#Cambiar a Select y add filter somehow
-			'driver_settlement':forms.TextInput(attrs={'class':'form-control','required': 'True'}),
+			'driver_settlement':forms.Select(attrs={'class':'form-control','required': 'True', 'placeholder':'Truck'}),
 			#Cambiar a Select y add filter somehow
-			'fedex_settlement': forms.TextInput(attrs={'class':'form-control','required': 'True'}),
+			'fedex_settlement': forms.Select(attrs={'class':'form-control','required': 'True'}),
 			'description': forms.TextInput(attrs={'class':'form-control'}),
 			'pickup_date': forms.DateInput(attrs={'class':'form-control','required': 'True','type':'date'}),
 			'delivery_date': forms.DateInput(attrs={'class':'form-control','required': 'True','type':'date'}),

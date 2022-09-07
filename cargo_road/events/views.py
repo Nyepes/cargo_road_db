@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import TruckForm, CargoForm
-from .models import Cargo
+from .models import Cargo, Truck
 
 def home(request):
+	print(Truck.objects.filter(name = 'CR1')[0].id)
 	return render(request, 'home.html',{})
 def view_cargo (request):
 	cargoList = Cargo.objects.all()
@@ -10,13 +11,12 @@ def view_cargo (request):
 def add_cargo (request):
 	if request.method == 'POST':
 		form = CargoForm(request.POST) ##TODO Change to CARGO
-
 		if form.is_valid():
-			form.save()
-			print("saved")
+			cargo = form.save(commit = False)
+			cargo.truck = Truck.objects.filter(name = form.data['truck'])[0].id
+			cargo.save()
 			return redirect("home")
 	else:
-		print("not valid")
 		form = CargoForm(request.POST) ##TODO Change to CARGOFORM
 	return render(request, 'add_cargo.html', {'form':form})
 
