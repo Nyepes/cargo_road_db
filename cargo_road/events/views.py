@@ -23,7 +23,7 @@ def add_cargo (request):
 def add_truck(request):
 	if request.method == 'POST':
 		form = TruckForm(request.POST)
-		if (form.is_vald()):
+		if (form.is_valid()):
 			form.save()
 			return redirect("home")
 	else:

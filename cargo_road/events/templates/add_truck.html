@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Add Truck</h1>
+</br>
+<form class="row g-3" action = "" method =POST>
+    {%csrf_token%}
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Nombre</label>
+      {{form.name}}
+    </div>
+    <div class="col-md-3">
+        <label for="inputState" class="form-label">Standard C Link</label>
+        {{form.standard_c_link}}
+      </div>
+      <div class="col-md-3">
+        <label for="inputState" class="form-label">Standard Insurance</label>
+        {{form.standard_insurance}}
+      </div>
+    <div class="col-md-12">
+      <label for="inputCity" class="form-label">Placa</label>
+      {{form.plate}}
+    </div>
+</br>
+    <div class="col-12">
+        <center>
+            <input type ="submit" value = "Submit" class="btn btn-success"></input>
+        </center>
+
+    </div>
+  </form>
+</br>
+</br>
+{% endblock %}
