@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import TruckForm, CargoForm
-from .models import Cargo, Truck
+from .forms import TruckForm, CargoForm, FedexSettlementForm
+from .models import Cargo, Truck, FedexSettlement
 
 def home(request):
 	print(Truck.objects.filter(name = 'CR1')[0].id)
@@ -29,5 +29,15 @@ def add_truck(request):
 	else:
 		form = TruckForm(request.POST)
 	return render(request, 'add_truck.html', {'form': form})
+
+def add_fedex_settlement(request):
+	if request.method == 'POST':
+		form = FedexSettlementForm(request.POST)
+		if (form.is_vald()):
+			form.save()
+			return redirect("home")
+	else:
+		form = FedexSettlementForm(request.POST)
+	return render(request, 'fedex_settlement.html', {'form': form})
 
 
