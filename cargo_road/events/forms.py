@@ -2,14 +2,15 @@ from logging import PlaceHolder
 from django import forms
 from django.forms import ModelForm
 from .models import Cargo, Truck, FedexSettlement
+from django.utils.translation import gettext as _
 
 class TruckForm(ModelForm):
 	class Meta:
 		model = Truck
 		fields = ('name', 'plate', 'standard_c_link', 'standard_insurance')
 		labels = {
-			"name": "Name",
-			"plate": "Liscence Plate",
+			"name": _("Name"),
+			"plate": _("Liscence Plate"),
 			"standard_c_link": "Standard C Link",
 			"standard_insurance": "Standard Insurance"
 		}
@@ -26,8 +27,8 @@ class FedexSettlementForm(ModelForm):
 			'personal_insurance','adjust')
 		labels = {
 			'settlement_fedex': "Settlement Fedex",
-			"settlement_date": "Settlement Date",
-			"fedex_payment_date": "Fedex Payment Date",
+			"settlement_date": "Settlement" + _("Date"),
+			"fedex_payment_date": "Fedex Payment" + _("Date"),
 			'applicant_cost': "Applicant Cost",
 			'personal_insurance': "Personal Insurance",
 			'adjust': "Adjust"
@@ -49,10 +50,10 @@ class CargoForm(ModelForm):
 
 		labels = {
 			'shipment': "Shipment",
-			'truck': "Truck",
+			'truck': _("Truck"),
 			'driver_settlement': "Driver Settlement",
 			'fedex_settlement': "Fedex Settlement",
-			'description': "Description",
+			'description': _("Description"),
 			'pickup_date': "Pickup Date",
 			'delivery_date': "Delivery Date",
 			'load_miles': "Load Miles",

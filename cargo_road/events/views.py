@@ -10,13 +10,24 @@ def view_cargo (request):
 	return render(request, 'view_cargo.html', {'cargoList':cargoList})
 def add_cargo (request):
 	if request.method == 'POST':
-		form = CargoForm(request.POST) ##TODO Change to CARGO
+		form = CargoForm(request.POST)
 		if form.is_valid():
 			cargo = form.save(commit = False)
 			cargo.truck = Truck.objects.filter(name = form.data['truck'])[0].id
 			cargo.save()
 			return redirect("home")
 	else:
-		form = CargoForm(request.POST) ##TODO Change to CARGOFORM
+		form = CargoForm(request.POST)
 	return render(request, 'add_cargo.html', {'form':form})
+
+def add_truck(request):
+	if request.method == 'POST':
+		form = TruckForm(request.POST)
+		if (form.is_vald()):
+			form.save()
+			return redirect("home")
+	else:
+		form = TruckForm(request.POST)
+	return render(request, 'add_truck.html', {'form': form})
+
 
