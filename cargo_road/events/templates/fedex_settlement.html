@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Fedex Settlement</h1>
+</br>
+<form action = "" method =POST>
+    {%csrf_token%}
+    {{form.as_p}}
+    <input type ="submit" value = "Submit" class="btn btn-success"></input>
+</form>
+</br>
+</br>
+{% endblock %}
