@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Driver</h1>
+</br>
+<form class="row g-3" action = "" method =POST>
+    {%csrf_token%}
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Name</label>
+      {{form.name}}
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Last Name</label>
+      {{form.last_name}}
+    </div>
+    <div class="col-12">
+      <label for="inputAddress" class="form-label">Nickname</label>
+      {{form.nickname}}
+    </div>
+    <div class="col-6">
+      <label for="inputAddress2" class="form-label">Fedex Driver ID</label>
+      {{form.driver_id_fedex}}
+    </div>
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">Standard Pay</label>
+      {{form.standard_pay}}
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        {{form.w2}}
+        <label class="form-check-label" for="gridCheck">
+          W2
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+        <input type ="submit" value = "Submit" class="btn btn-success"></input>
+    </div>
+  </form>
+{% endblock %}
