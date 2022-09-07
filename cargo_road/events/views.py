@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import TruckForm, CargoForm, FedexSettlementForm
+from .forms import DriverForm, TruckForm, CargoForm, FedexSettlementForm
 from .models import Cargo, Truck, FedexSettlement
 
 def home(request):
@@ -33,11 +33,20 @@ def add_truck(request):
 def add_fedex_settlement(request):
 	if request.method == 'POST':
 		form = FedexSettlementForm(request.POST)
-		if (form.is_vald()):
+		if (form.is_valid()):
 			form.save()
 			return redirect("home")
 	else:
 		form = FedexSettlementForm(request.POST)
 	return render(request, 'fedex_settlement.html', {'form': form})
+def add_driver(request):
+	if request.method == 'POST':
+		form = DriverForm(request.POST)
+		if (form.is_valid()):
+			form.save()
+			return redirect("home")
+	else:
+		form = DriverForm(request.POST)
+	return render(request, 'add_driver.html', {'form': form})
 
 

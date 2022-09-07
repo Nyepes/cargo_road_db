@@ -1,7 +1,7 @@
 from logging import PlaceHolder
 from django import forms
 from django.forms import ModelForm
-from .models import Cargo, Truck, FedexSettlement
+from .models import Cargo, Driver, Truck, FedexSettlement
 from django.utils.translation import gettext as _
 
 class TruckForm(ModelForm):
@@ -89,4 +89,22 @@ class CargoForm(ModelForm):
 			'detention': forms.NumberInput(attrs={'class':'form-control','required': 'True', }),
 			'state': forms.TextInput(attrs={'class':'form-control','required': 'True'}),
 		}
-
+class DriverForm(ModelForm):
+	class Meta:
+		model = Driver
+		fields = ('nickname', 'name', 'last_name', 'driver_id_fedex','standard_pay','w2')
+		labels = {
+			"nickname": "Nickname",
+			"name": 'Name',
+			"last_name": "Last Name",
+			"driver_id_fedex": "Fedex Driver ID",
+			"standard_pay": "Standard Pay",
+			"w2":"W2"
+		}
+		widgets = {
+			"nickname": forms.TextInput(attrs={'class':'form-control','required': 'True'}),
+			"name": forms.TextInput(attrs={'class':'form-control','required': 'True'}),
+			"last_name": forms.TextInput(attrs={'class':'form-control','required': 'True'}),
+			"driver_id_fedex": forms.NumberInput(attrs={'class':'form-control','required': 'True'}),
+			"standard_pay": forms.NumberInput(attrs={'class':'form-control','required': 'True'})
+		}

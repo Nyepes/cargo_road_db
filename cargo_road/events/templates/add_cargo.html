@@ -3,11 +3,80 @@
 {% block content %}
 <h1>Add Cargo</h1>
 </br>
-<form action = "" method =POST>
+<form class="row g-3" action = "" method = POST>
     {%csrf_token%}
-    {{form.as_p}}
-    <input type ="submit" value = "Submit" class="btn btn-success"></input>
-</form>
+    <div class="col-md-11">
+      <label for="inputEmail4" class="form-label">Shipment Number</label>
+      {{form.shipment}}
+    </div>
+    <div class="col-md-1">
+        <label for="inputEmail4" class="form-label">State</label>
+        {{form.state}}
+      </div>
+    <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Pickup Date</label>
+        {{form.pickup_date}}
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Delivery Date</label>
+        {{form.delivery_date}}
+      </div>
+    <div class="col-md-4">
+      <label for="inputPassword4" class="form-label">Truck Name</label>
+      {{form.truck}}
+    </div>
+    <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">Driver Settlement</label>
+        {{form.driver_settlement}}
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">Fedex Settlement</label>
+        {{form.fedex_settlement}}
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Loaded Income</label>
+        {{form.loaded_income}}
+      </div>  
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Load Miles</label>
+        {{form.load_miles}}
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">Fuel Surcharge</label>
+        {{form.loaded_income}}
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">Tolls Surcharge</label>
+        {{form.tolls_surcharge}}
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">DHPU</label>
+        {{form.dhpu}}
+      </div>
+      <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">Empty Income</label>
+        {{form.empty_income}}
+      </div>
+      <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">T Check Advance</label>
+        {{form.t_check_advance}}
+      </div>
+      <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">Traded Value</label>
+        {{form.traded_value}}
+      </div>
+      <div class="col-md-3">
+        <label for="inputPassword4" class="form-label">Detention</label>
+        {{form.detention}}
+      </div>
+      <div class="col-md-12">
+        <label for="inputPassword4" class="form-label">Description</label>
+        {{form.description}}
+      </div>
+      <div class="col-md-4">
+        <input type ="submit" value = "Submit" class="btn btn-success"></input>
+      </div>
+
 </br>
 </br>
 {% endblock %}

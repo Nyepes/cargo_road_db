@@ -58,12 +58,12 @@ class Cargo (models.Model):
 	state = models.CharField(blank = True, max_length = 20)
 
 class Driver (models.Model):
-	driver_id = models.CharField(max_length=20)
-	name = models.CharField(max_length=30)
-	last_name = models.CharField(max_length=30)
+	nickname = models.CharField(max_length=20, blank=True)
+	name = models.CharField(max_length=30, blank=True)
+	last_name = models.CharField(max_length=30, blank=True)
 	w2 = models.BooleanField()
-	driver_id_fedex = models.PositiveIntegerField()
-	standard_pay = models.PositiveSmallIntegerField()
+	driver_id_fedex = models.PositiveIntegerField(blank=True)
+	standard_pay = models.PositiveSmallIntegerField(blank=True)
 
 class DriverXCargo(models.Model):
 	shipment = models.ForeignKey(Cargo, on_delete = models.CASCADE)
