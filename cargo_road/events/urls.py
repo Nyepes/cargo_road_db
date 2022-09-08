@@ -8,6 +8,7 @@ urlpatterns = [
     path('add-fedex-settlement', views.add_fedex_settlement,name = 'add_fedex_settlement'),
     path('add-driver', views.add_driver,name = 'add_driver'),
     path('driver-list',views.driver_list,name="view_drivers"),
+    path('truck-list',views.truck_list,name="view_trucks"),
     path('detail-driver<driver_id>', views.detail_driver, name='detail_driver'),
     path('update-driver<driver_id>',views.update_driver,name='update_driver')
 ]

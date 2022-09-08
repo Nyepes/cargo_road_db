@@ -5,11 +5,17 @@
 
 <table class="table table-hover">
   <tbody>
+    <thead>
+      <tr>
+        <th scope="col">Nickname</th>
+        <th scope="col">Name</th>
+        <th scope="col">Driver ID</th>
+      </tr>
+    </thead>
     {%for driver in drivers%}
     <tr style="transform: rotate(0);">
     <th scope="row"><a href="{%url 'detail_driver' driver.id %}" class="stretched-link">{{driver.nickname}}</a></th>
-      <td>{{driver.name}}</td>
-      <td>{{driver.last_name}}</td>
+      <td>{{driver.name}} {{driver.last_name}}</td>
       <td>{{driver.driver_id_fedex}}</td>
     </tr>
     {%endfor%}

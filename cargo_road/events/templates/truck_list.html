@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Trucks</h1>
+</br></br>
+
+<table class="table table-hover">
+  <tbody>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Liscence Plate</th>
+      </tr>
+    </thead>
+    {%for truck in trucks%}
+    <tr style="transform: rotate(0);">
+    <th scope="row"><a href="#" class="stretched-link">{{truck.name}}</a></th>
+      <td>{{truck.plate}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+  {%endblock%}
