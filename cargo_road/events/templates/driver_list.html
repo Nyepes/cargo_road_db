@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Drivers</h1>
+</br></br>
+
+<table class="table table-hover">
+  <tbody>
+    {%for driver in drivers%}
+    <tr style="transform: rotate(0);">
+    <th scope="row"><a href="{%url 'detail_driver' driver.id %}" class="stretched-link">{{driver.nickname}}</a></th>
+      <td>{{driver.name}}</td>
+      <td>{{driver.last_name}}</td>
+      <td>{{driver.driver_id_fedex}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+  {%endblock%}

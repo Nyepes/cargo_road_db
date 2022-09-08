@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{%block content%}
+<h2>{{driver.nickname}} - {{driver.driver_id_fedex}}</h2>
+</br></br>
+<h4>{{driver.name}} {{driver.last_name}}</h4>
+</br>
+<h6>Standard Pay: {{driver.standard_pay}}</h6>
+<h6>W2: {{driver.w2}}</h6>
+
+<a href="{% url 'update_driver' driver.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+</br></br>
+<h4>Cargo</h4>
+<table class="table table-hover">
+    <tbody>
+      {%for cargo in cargos%}
+      <tr style="transform: rotate(0);">
+      <th scope="row"><a href="{%url 'detail_driver' driver.id %}" class="stretched-link">{{driver.nickname}}</a></th>
+        <td>{{driver.name}}</td>
+        <td>{{driver.last_name}}</td>
+        <td>{{driver.driver_id_fedex}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+{%endblock%}

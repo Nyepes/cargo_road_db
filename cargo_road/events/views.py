@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import DriverForm, TruckForm, CargoForm, FedexSettlementForm
-from .models import Cargo, Truck, FedexSettlement
+from .models import Cargo, Driver, Truck, FedexSettlement
 
 def home(request):
 	print(Truck.objects.filter(name = 'CR1')[0].id)
@@ -48,5 +48,20 @@ def add_driver(request):
 	else:
 		form = DriverForm(request.POST)
 	return render(request, 'add_driver.html', {'form': form})
+def driver_list(request):
+	drivers = Driver.objects.order_by('name')
+	return render(request, 'driver_list.html', {'drivers':drivers})
+def detail_driver(request, driver_id):
+	driver = Driver.objects.get(pk=driver_id)
+	##TODO Implement view cargo
+	return render(request, 'driver.html', {'driver':driver})
+def update_driver(request, driver_id):
+	driver = Driver.objects.get(pk=driver_id)
+	form = DriverForm(request.POST or None, instance=driver)
+	if request.method == 'POST':
+		if (form.is_valid()):
+			form.save()
+			return redirect("home")
+	return render(request, 'add_driver.html', {'form': form, 'driver':driver})
 
 
