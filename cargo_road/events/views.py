@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import DriverForm, TruckForm, CargoForm, FedexSettlementForm
-from .models import Cargo, Driver, Truck, FedexSettlement
+from .forms import DriverForm, DriverXCargoForm, TruckForm, CargoForm, FedexSettlementForm
+from .models import Cargo, Driver, DriverXCargo, Truck, FedexSettlement
 
 def home(request):
 	print(Truck.objects.filter(name = 'CR1')[0].id)
@@ -9,16 +9,23 @@ def view_cargo (request):
 	cargoList = Cargo.objects.all()
 	return render(request, 'view_cargo.html', {'cargoList':cargoList})
 def add_cargo (request):
+	form1 = DriverXCargoForm(request.POST)
+	form2 = DriverXCargoForm(request.POST)
 	if request.method == 'POST':
 		form = CargoForm(request.POST)
-		if form.is_valid():
-			cargo = form.save(commit = False)
-			cargo.truck = Truck.objects.filter(name = form.data['truck'])[0].id
-			cargo.save()
+		valid = form.is_valid() and form1.data['driver'] != form1.data['driver'] and form1.is_valid() and form2.is_valid()
+		if valid:
+			form.save()
+			d1 = form1.save(commit = False)
+			d2 = form2.save(commit = False)
+			d1.shipment = form.get['shipment']
+			d2.shipment = form.get['shipment']
+			d1.save()
+			d2.save()
 			return redirect("home")
 	else:
 		form = CargoForm(request.POST)
-	return render(request, 'add_cargo.html', {'form':form})
+	return render(request, 'add_cargo.html', {'form':form, 'form1': form1, 'form2': form2})
 
 def add_truck(request):
 	if request.method == 'POST':

@@ -1,7 +1,7 @@
 from logging import PlaceHolder
 from django import forms
 from django.forms import ModelForm
-from .models import Cargo, Driver, Truck, FedexSettlement
+from .models import Cargo, Driver, DriverXCargo, Truck, FedexSettlement
 from django.utils.translation import gettext as _
 
 class TruckForm(ModelForm):
@@ -65,7 +65,7 @@ class CargoForm(ModelForm):
 			't_check_advance': "T Check Advance",
 			'traded_value': "Traded Value",
 			'detention': "Detention",
-			'state': "State"
+			'state': "State",
 		}
 		widgets = {
 			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True' }),
@@ -107,4 +107,18 @@ class DriverForm(ModelForm):
 			"last_name": forms.TextInput(attrs={'class':'form-control','required': 'True'}),
 			"driver_id_fedex": forms.NumberInput(attrs={'class':'form-control','required': 'True'}),
 			"standard_pay": forms.NumberInput(attrs={'class':'form-control','required': 'True'})
+		}
+class DriverXCargoForm(ModelForm):
+	class Meta:
+		model = DriverXCargo
+		fields = ('shipment','driver_id','percentage')
+		labels = {
+			'shipment': "Shipment Number",
+			'driver_id': "Driver",
+			'percentage': "Percentage"
+		}
+		widgets = {
+			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True' }),
+			'driver_id':  forms.Select(attrs={'class':'form-control','required': 'True'}),
+			'percentage': forms.NumberInput(attrs={'class':'form-control','required': 'True'}),
 		}

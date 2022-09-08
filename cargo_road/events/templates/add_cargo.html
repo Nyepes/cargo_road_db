@@ -34,6 +34,22 @@
         {{form.fedex_settlement}}
       </div>
       <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Driver 1</label>
+        {{form1.driver_id}}
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Percentage Driver 1</label>
+        {{form1.percentage}}
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Driver 2</label>
+        {{form2.driver_id}}
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Percentage Driver 2</label>
+        {{form2.percentage}}
+      </div>
+      <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Loaded Income</label>
         {{form.loaded_income}}
       </div>  
@@ -75,8 +91,10 @@
       </div>
       <div class="col-md-4">
         <input type ="submit" value = "Submit" class="btn btn-success"></input>
+        
       </div>
+</form>
+</br>
+</br>
 
-</br>
-</br>
 {% endblock %}

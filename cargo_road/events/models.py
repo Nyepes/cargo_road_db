@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Class Truck with attributes
 # name: CR + id.  (ie. CR1)
@@ -64,8 +64,10 @@ class Driver (models.Model):
 	w2 = models.BooleanField()
 	driver_id_fedex = models.PositiveIntegerField(blank=True)
 	standard_pay = models.PositiveSmallIntegerField(blank=True)
+	def __str__(self):
+		return self.name + self.last_name +" | "+self.nickname
 
 class DriverXCargo(models.Model):
 	shipment = models.ForeignKey(Cargo, on_delete = models.CASCADE)
 	driver_id = models.ForeignKey(Driver, on_delete = models.CASCADE)
-	percentage = models.PositiveSmallIntegerField()
+	percentage = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
