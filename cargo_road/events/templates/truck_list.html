@@ -13,7 +13,7 @@
     </thead>
     {%for truck in trucks%}
     <tr style="transform: rotate(0);">
-    <th scope="row"><a href="#" class="stretched-link">{{truck.name}}</a></th>
+    <th scope="row"><a href="{%url 'detail_truck' truck.id%}" class="stretched-link">{{truck.name}}</a></th>
       <td>{{truck.plate}}</td>
     </tr>
     {%endfor%}

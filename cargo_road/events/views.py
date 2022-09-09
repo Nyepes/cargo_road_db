@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import DriverForm, DriverXCargoForm, TruckForm, CargoForm, FedexSettlementForm
 from .models import Cargo, Driver, DriverXCargo, Truck, FedexSettlement
-from django.db.models import Q
+
 def home(request):
 	print(Truck.objects.filter(name = 'CR1')[0].id)
 	return render(request, 'home.html',{})
@@ -65,6 +65,10 @@ def detail_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)
 	#cargo = DriverXCargo.objects.filter(driver_id = did)
 	return render(request, 'driver.html', {'driver':driver})
+def detail_truck(request, truck_id):
+	truck = Truck.objects.get(pk=truck_id)
+	#cargo = DriverXCargo.objects.filter(driver_id = did)
+	return render(request, 'view_truck.html', {'truck':truck})
 def update_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)
 	form = DriverForm(request.POST or None, instance=driver)

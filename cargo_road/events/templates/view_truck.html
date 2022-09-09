@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+{%block content%}
+<h2>{{truck.name}}</h2>
+</br></br>
+<h4>{{truck.plate}}</h4>
+</br>
+</br>
+<h6>C-Link {{truck.c_link}}</h6>
+</br>
+<h6>Standard Insurance: {{truck.standard_insurance}}</h6>
+
+<a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
+</br></br>
+<h4>Cargo</h4>
+<!-- <table class="table table-hover">
+    <tbody>
+      {%for cargo in cargos%}
+      <tr style="transform: rotate(0);">
+      <th scope="row"><a href="{%url 'detail_driver' driver.id %}" class="stretched-link">{{driver.nickname}}</a></th>
+        <td>{{driver.name}}</td>
+        <td>{{driver.last_name}}</td>
+        <td>{{driver.driver_id_fedex}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table> -->
+{%endblock%}
