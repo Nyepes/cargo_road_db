@@ -61,9 +61,9 @@ def driver_list(request):
 def truck_list(request):
 	trucks = Truck.objects.order_by('name')
 	return render(request, 'truck_list.html', {'trucks':trucks})
-def detail_driver(request, did):
-	driver = Driver.objects.get(pk=did)
-	cargo = DriverXCargo.objects.filter(driver_id = did)
+def detail_driver(request, driver_id):
+	driver = Driver.objects.get(pk=driver_id)
+	#cargo = DriverXCargo.objects.filter(driver_id = did)
 	return render(request, 'driver.html', {'driver':driver})
 def update_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)
