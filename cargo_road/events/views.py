@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import Driver2XCargoForm, DriverForm, Driver1XCargoForm, TruckForm, CargoForm, FedexSettlementForm
 from .models import Cargo, Driver, DriverXCargo, Truck, FedexSettlement
+from django.core.paginator import Paginator
 
 def home(request):
 	print(Cargo.objects.first())
@@ -66,8 +67,10 @@ def detail_driver(request, driver_id):
 	return render(request, 'driver.html', {'driver':driver})
 def detail_truck(request, truck_id):
 	truck = Truck.objects.get(pk=truck_id)
-	#cargo = DriverXCargo.objects.filter(driver_id = did)
-	return render(request, 'view_truck.html', {'truck':truck})
+	p = Paginator(Cargo.objects.filter(truck_id = truck_id).order_by('-date'),10)
+	page = request.GET.get('page')
+	cargo = p.get_page(page)
+	return render(request, 'view_truck.html', {'truck':truck, 'cargos':cargo})
 def update_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)
 	form = DriverForm(request.POST or None, instance=driver)
