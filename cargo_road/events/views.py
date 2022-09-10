@@ -24,7 +24,6 @@ def add_cargo (request):
 	form2 = Driver2XCargoForm(request.POST)
 	form = CargoForm(request.POST)
 	return render(request, 'add_cargo.html', {'form':form, 'form1': form1, 'form2': form2})
-
 def load_driver(request):
     driver_id = request.GET.get('driver')
     driver_percent = DriverXCargo.objects.filter(driver=driver_id).latest('percentage')
@@ -35,10 +34,8 @@ def add_truck(request):
 		if (form.is_valid()):
 			form.save()
 			return redirect("home")
-	else:
-		form = TruckForm(request.POST)
+	form = TruckForm(request.POST)
 	return render(request, 'add_truck.html', {'form': form})
-
 def add_fedex_settlement(request):
 	if request.method == 'POST':
 		form = FedexSettlementForm(request.POST)
@@ -79,5 +76,14 @@ def update_driver(request, driver_id):
 			form.save()
 			return redirect("home")
 	return render(request, 'add_driver.html', {'form': form, 'driver':driver})
+def update_truck(request, truck_id):
+	truck = Truck.objects.get(pk = truck_id)
+	form = TruckForm(request.POST or None, instance=truck)
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			return redirect('home')
+	return render (request,'add_truck.html',{'form':form})
+
 
 

@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Add Cargo</h1>
 </br>
-<form class="row g-3" action = "" method = POST  id="cargoForm" data-driver-url="{% url 'ajax_load_driver' %}" novalidate>
+<form class="row g-3" action = "" method = POST >
     {%csrf_token%}
     <div class="col-md-11">
       <label for="inputEmail4" class="form-label">Shipment Number</label>

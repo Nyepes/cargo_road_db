@@ -37,25 +37,27 @@ class TruckFedexSettlement (models.Model):
 class DriverSettlement (models.Model):
 	settlement_drivers = models.PositiveIntegerField()
 	pay_date = models.DateField()
+	def __str__(self):
+		return str(self.settlement_drivers)
 
 class Cargo (models.Model):
 	shipment = models.PositiveIntegerField(primary_key=True)
-	truck = models.ForeignKey(Truck, blank = True, on_delete = models.CASCADE) #hablar con papi sobre on delete
-	driver_settlement = models.ForeignKey(DriverSettlement, blank = True,  on_delete = models.CASCADE)
-	fedex_settlement = models.ForeignKey(FedexSettlement, blank = True,  on_delete = models.CASCADE)
-	description = models.CharField(blank = True, max_length = 300) #Change max length
-	pickup_date = models.DateField(blank = True )
-	delivery_date = models.DateField(blank = True)
+	truck = models.ForeignKey(Truck, on_delete = models.CASCADE) #hablar con papi sobre on delete
+	driver_settlement = models.ForeignKey(DriverSettlement, on_delete = models.CASCADE)
+	fedex_settlement = models.ForeignKey(FedexSettlement,   on_delete = models.CASCADE)
+	description = models.CharField( max_length = 300) #Change max length
+	pickup_date = models.DateField()
+	delivery_date = models.DateField()
 	load_miles = models.PositiveSmallIntegerField(blank = True)
-	loaded_income = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10)
-	fuel_surcharge = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	tolls_surcharge = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	dhpu = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	empty_income = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	t_check_advance = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	traded_value = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	detention = models.DecimalField(blank = True, decimal_places = 2, max_digits = 10, default = 0)
-	state = models.CharField(blank = True, max_length = 20)
+	loaded_income = models.DecimalField( decimal_places = 2, max_digits = 10)
+	fuel_surcharge = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	tolls_surcharge = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	dhpu = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	empty_income = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	t_check_advance = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	traded_value = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	detention = models.DecimalField( decimal_places = 2, max_digits = 10, default = 0)
+	state = models.CharField( max_length = 20)
 
 class Driver (models.Model):
 	nickname = models.CharField(max_length=20, blank=True)
