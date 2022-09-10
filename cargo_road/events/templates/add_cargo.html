@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Add Cargo</h1>
 </br>
-<form class="row g-3" action = "" method = POST>
+<form class="row g-3" action = "" method = POST  id="cargoForm" data-driver-url="{% url 'ajax_load_driver' %}" novalidate>
     {%csrf_token%}
     <div class="col-md-11">
       <label for="inputEmail4" class="form-label">Shipment Number</label>
@@ -35,15 +35,15 @@
       </div>
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Driver 1</label>
-        {{form1.driver_id}}
+        {{form1.dri}}
       </div>
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Percentage Driver 1</label>
         {{form1.percentage}}
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" name="dr2">
         <label for="inputPassword4" class="form-label">Driver 2</label>
-        {{form2.driver_id}}
+        {{form2.dri}}
       </div>
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Percentage Driver 2</label>
@@ -94,6 +94,24 @@
         
       </div>
 </form>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_driver").change(function () {
+      var url = $("#cargoForm").attr("data-driver-url");  // get the url of the `load_cities` view
+      var driverId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'driver': driverId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_percentage").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script> -->
 </br>
 </br>
 

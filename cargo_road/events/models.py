@@ -22,7 +22,7 @@ class FedexSettlement (models.Model):
 	personal_insurance = models.DecimalField(decimal_places=2,max_digits=7,default=0)
 	adjust = models.DecimalField(decimal_places=2,max_digits=8,default=0)
 	def __str__(self):
-		return self.settlement_fedex
+		return str(self.settlement_fedex)
 
 class TruckFedexSettlement (models.Model):
 	settlement_fedex = models.ForeignKey(FedexSettlement, on_delete = models.CASCADE) # Repasar on delete methods
@@ -33,13 +33,13 @@ class TruckFedexSettlement (models.Model):
 	other_costs = models.DecimalField(decimal_places=2, max_digits=10, default=0)
 	scrow = models.DecimalField(decimal_places=2, max_digits=10, default=0)
 	def __str__(self):
-		return self.settlement_fedex
+		return str(self.settlement_fedex)
 class DriverSettlement (models.Model):
 	settlement_drivers = models.PositiveIntegerField()
 	pay_date = models.DateField()
 
 class Cargo (models.Model):
-	shipment = models.PositiveIntegerField(blank = True, )
+	shipment = models.PositiveIntegerField(primary_key=True)
 	truck = models.ForeignKey(Truck, blank = True, on_delete = models.CASCADE) #hablar con papi sobre on delete
 	driver_settlement = models.ForeignKey(DriverSettlement, blank = True,  on_delete = models.CASCADE)
 	fedex_settlement = models.ForeignKey(FedexSettlement, blank = True,  on_delete = models.CASCADE)
@@ -69,5 +69,5 @@ class Driver (models.Model):
 
 class DriverXCargo(models.Model):
 	shipment = models.ForeignKey(Cargo, on_delete = models.CASCADE)
-	driver_id = models.ForeignKey(Driver, on_delete = models.CASCADE)
+	dri = models.ForeignKey(Driver, on_delete = models.CASCADE)
 	percentage = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])

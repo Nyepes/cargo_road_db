@@ -1,32 +1,34 @@
 from django.shortcuts import render, redirect
-from .forms import DriverForm, DriverXCargoForm, TruckForm, CargoForm, FedexSettlementForm
+from .forms import Driver2XCargoForm, DriverForm, Driver1XCargoForm, TruckForm, CargoForm, FedexSettlementForm
 from .models import Cargo, Driver, DriverXCargo, Truck, FedexSettlement
 
 def home(request):
-	print(Truck.objects.filter(name = 'CR1')[0].id)
+	print(Cargo.objects.first())
+	print(Driver.objects.first())
 	return render(request, 'home.html',{})
 def view_cargo (request):
 	cargoList = Cargo.objects.all()
 	return render(request, 'view_cargo.html', {'cargoList':cargoList})
 def add_cargo (request):
-	form1 = DriverXCargoForm(request.POST)
-	form2 = DriverXCargoForm(request.POST)
 	if request.method == 'POST':
 		form = CargoForm(request.POST)
-		valid = form.is_valid() and form1.data['driver'] != form1.data['driver'] and form1.is_valid() and form2.is_valid()
-		if valid:
-			form.save()
-			d1 = form1.save(commit = False)
-			d2 = form2.save(commit = False)
-			d1.shipment = form.get['shipment']
-			d2.shipment = form.get['shipment']
-			d1.save()
-			d2.save()
-			return redirect("home")
-	else:
-		form = CargoForm(request.POST)
+		if form.is_valid():
+			cargo = form.save()
+			form1 = Driver1XCargoForm(request.POST, initial={'shipment':cargo})
+			form2 = Driver2XCargoForm(request.POST, initial={'shipment':cargo})
+			if form1.is_valid() and form2.is_valid():
+				form1.save()
+				form2.save()
+				return redirect("home")
+	form1 = Driver1XCargoForm(request.POST)
+	form2 = Driver2XCargoForm(request.POST)
+	form = CargoForm(request.POST)
 	return render(request, 'add_cargo.html', {'form':form, 'form1': form1, 'form2': form2})
 
+def load_driver(request):
+    driver_id = request.GET.get('driver')
+    driver_percent = DriverXCargo.objects.filter(driver=driver_id).latest('percentage')
+    return render(request, 'add_cargo.html', {'percentage': driver_percent})
 def add_truck(request):
 	if request.method == 'POST':
 		form = TruckForm(request.POST)
