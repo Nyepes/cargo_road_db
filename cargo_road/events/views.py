@@ -9,7 +9,7 @@ def home(request):
 	return render(request, 'home.html',{})
 def view_cargo (request):
 	cargoList = Cargo.objects.all()
-	return render(request, 'view_cargo.html', {'cargoList':cargoList})
+	return render(request, 'lists/view_cargo.html', {'cargoList':cargoList})
 def add_cargo (request):
 	if request.method == 'POST':
 		form = CargoForm(request.POST)
@@ -24,11 +24,7 @@ def add_cargo (request):
 	form1 = Driver1XCargoForm(request.POST)
 	form2 = Driver2XCargoForm(request.POST)
 	form = CargoForm(request.POST)
-	return render(request, 'add_cargo.html', {'form':form, 'form1': form1, 'form2': form2})
-def load_driver(request):
-    driver_id = request.GET.get('driver')
-    driver_percent = DriverXCargo.objects.filter(driver=driver_id).latest('percentage')
-    return render(request, 'add_cargo.html', {'percentage': driver_percent})
+	return render(request, 'create/add_cargo.html', {'form':form, 'form1': form1, 'form2': form2})
 def add_truck(request):
 	if request.method == 'POST':
 		form = TruckForm(request.POST)
@@ -36,7 +32,7 @@ def add_truck(request):
 			form.save()
 			return redirect("home")
 	form = TruckForm(request.POST)
-	return render(request, 'add_truck.html', {'form': form})
+	return render(request, 'create/add_truck.html', {'form': form})
 def add_fedex_settlement(request):
 	if request.method == 'POST':
 		form = FedexSettlementForm(request.POST)
@@ -45,7 +41,7 @@ def add_fedex_settlement(request):
 			return redirect("home")
 	else:
 		form = FedexSettlementForm(request.POST)
-	return render(request, 'fedex_settlement.html', {'form': form})
+	return render(request, 'create/fedex_settlement.html', {'form': form})
 def add_driver(request):
 	if request.method == 'POST':
 		form = DriverForm(request.POST)
@@ -54,23 +50,23 @@ def add_driver(request):
 			return redirect("home")
 	else:
 		form = DriverForm(request.POST)
-	return render(request, 'add_driver.html', {'form': form})
+	return render(request, 'create/add_driver.html', {'form': form})
 def driver_list(request):
 	drivers = Driver.objects.order_by('name')
-	return render(request, 'driver_list.html', {'drivers':drivers})
+	return render(request, 'lists/driver_list.html', {'drivers':drivers})
 def truck_list(request):
 	trucks = Truck.objects.order_by('name')
-	return render(request, 'truck_list.html', {'trucks':trucks})
+	return render(request, 'lists/truck_list.html', {'trucks':trucks})
 def detail_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)
 	#cargo = DriverXCargo.objects.filter(driver_id = did)
-	return render(request, 'driver.html', {'driver':driver})
+	return render(request, 'detail/driver.html', {'driver':driver})
 def detail_truck(request, truck_id):
 	truck = Truck.objects.get(pk=truck_id)
-	p = Paginator(Cargo.objects.filter(truck_id = truck_id).order_by('-date'),10)
+	p = Paginator(Cargo.objects.filter(truck_id = truck_id).order_by('-pickup_date'),10)
 	page = request.GET.get('page')
 	cargo = p.get_page(page)
-	return render(request, 'view_truck.html', {'truck':truck, 'cargos':cargo})
+	return render(request, 'detail/view_truck.html', {'truck':truck, 'cargos':cargo})
 def update_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)
 	form = DriverForm(request.POST or None, instance=driver)
@@ -78,7 +74,7 @@ def update_driver(request, driver_id):
 		if (form.is_valid()):
 			form.save()
 			return redirect("home")
-	return render(request, 'add_driver.html', {'form': form, 'driver':driver})
+	return render(request, 'create/add_driver.html', {'form': form, 'driver':driver})
 def update_truck(request, truck_id):
 	truck = Truck.objects.get(pk = truck_id)
 	form = TruckForm(request.POST or None, instance=truck)
@@ -86,7 +82,7 @@ def update_truck(request, truck_id):
 		if form.is_valid():
 			form.save()
 			return redirect('home')
-	return render (request,'add_truck.html',{'form':form})
+	return render (request,'create/add_truck.html',{'form':form})
 
 
 

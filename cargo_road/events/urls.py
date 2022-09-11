@@ -13,5 +13,4 @@ urlpatterns = [
     path('update-driver<driver_id>',views.update_driver,name='update_driver'),
     path('detail-truck<truck_id>', views.detail_truck, name='detail_truck'),
     path('update-truck<truck_id>', views.update_truck, name='update_truck'),
-    path('ajax/get-driver/', views.load_driver, name='ajax_load_driver'),
 ]
