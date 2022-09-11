@@ -66,6 +66,7 @@ def detail_truck(request, truck_id):
 	p = Paginator(Cargo.objects.filter(truck_id = truck_id).order_by('-pickup_date'),10)
 	page = request.GET.get('page')
 	cargo = p.get_page(page)
+	
 	return render(request, 'detail/view_truck.html', {'truck':truck, 'cargos':cargo})
 def update_driver(request, driver_id):
 	driver = Driver.objects.get(pk=driver_id)

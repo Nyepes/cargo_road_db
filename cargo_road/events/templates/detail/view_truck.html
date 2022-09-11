@@ -5,11 +5,20 @@
 <h6><b>Plate:</b> {{truck.plate}}</h6>
 <h6><b>C-Link:</b> {{truck.standard_c_link}}</h6>
 <h6><b>Standard Insurance: </b>{{truck.standard_insurance}}</h6>
+<h6><b>Total Loaded Miles: </b>{{truck.total_miles}}</h6>
 </br>
 <a href="{%url 'update_truck' truck.id%}" class="btn btn-outline-secondary btn-sm">Update</a>
 </br></br>
 <h4>Cargo</h4>
 <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Pickup Date</th>
+      <th scope="col">Loaded Miles</th>
+      <th scope="col">Loaded Income</th>
+      <th scope="col">Fedex Settlement</th>
+    </tr>
+  </thead>
     <tbody>
       {%for cargo in cargos%}
       <tr style="transform: rotate(0);">
@@ -27,9 +36,7 @@
       <li class="page-item"><a class="page-link" href="?page=1">&laquo</a></li>
       <li class="page-item"><a class="page-link" href="?page={{cargos.previous_page_number}}">{{cargos.previous_page_number}}</a></li>
       {%endif%}
-      {%if cargos.has_next and cargos.has_previous  %}
       <li class="page-item active"><a class="page-link" href="#">{{cargos.number}}</a></li>
-      {%endif%}
       {%if cargos.has_next %}
       <li class="page-item"><a class="page-link" href="?page={{cargos.next_page_number}}">{{cargos.next_page_number}}</a></li>
       <li class="page-item"><a class="page-link" href="?page={{cargos.num_pages}}">&raquo</a></li>

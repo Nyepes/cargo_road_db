@@ -1,12 +1,12 @@
 {% extends 'base.html'%}
 {%block content%}
-<h2>{{driver.nickname}} - {{driver.driver_id_fedex}}</h2>
-</br></br>
-<h4>{{driver.name}} {{driver.last_name}}</h4>
+<h2>{{driver.nickname}}</h2>
 </br>
-<h6>Standard Pay: {{driver.standard_pay}}</h6>
-<h6>W2: {{driver.w2}}</h6>
-
+<h5>{{driver.name}} {{driver.last_name}}</h5>
+<h6><b>Fedex Driver ID: </b>{{driver.driver_id_fedex}}</h6>
+<h6><b>Standard Pay: </b>{{driver.standard_pay}}</h6>
+<h6><b>W2: </b>{{driver.w2}}</h6>
+</br>
 <a href="{% url 'update_driver' driver.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
 </br></br>
 <h4>Cargo</h4>
