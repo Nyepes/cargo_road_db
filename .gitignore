@@ -1,2 +1,6 @@
 venv/
 .pw
+*.pyc
+cargo_road/db.sqlite3
+*.sqlite3
+*.sqlite3
