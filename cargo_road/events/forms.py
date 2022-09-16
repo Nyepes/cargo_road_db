@@ -70,8 +70,8 @@ class CargoForm(ModelForm):
 		widgets = {
 			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True' }),
 			'truck': forms.Select(attrs={'class':'form-control','required': 'True', 'placeholder':'Truck'}),
-			'driver_settlement':forms.Select(attrs={'class':'form-control','required': 'True', 'placeholder':'Truck'}),
-			'fedex_settlement': forms.Select(attrs={'class':'form-control','required': 'True'}),
+			'driver_settlement':forms.Select(attrs={'class':'form-control', 'placeholder':'Truck'}),
+			'fedex_settlement': forms.Select(attrs={'class':'form-control'}),
 			'description': forms.TextInput(attrs={'class':'form-control'}),
 			'pickup_date': forms.DateInput(attrs={'class':'form-control','required': 'True','type':'date'}),
 			'delivery_date': forms.DateInput(attrs={'class':'form-control','required': 'True','type':'date'}),
@@ -108,28 +108,26 @@ class DriverForm(ModelForm):
 class Driver1XCargoForm(ModelForm):
 	class Meta:
 		model = DriverXCargo
-		fields = ('shipment','dri','percentage')
+		fields = ('driver_cargo','dri','percentage')
 		labels = {
-			'shipment': "Shipment Number",
+			'driver_cargo': "Shipment Number",
 			'dri': "Driver",
 			'percentage': "Percentage"
 		}
 		widgets = {
-			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True' }),
 			'dri':  forms.Select(attrs={'class':'form-control','required': 'True','name':'name'}),
-			'percentage': forms.NumberInput(attrs={'class':'form-control','required': 'True'}),
+			'percentage': forms.NumberInput(attrs={'class':'form-control', 'required': 'False'}),
 		}
 class Driver2XCargoForm(ModelForm):
 	class Meta:
 		model = DriverXCargo
-		fields = ('shipment','dri','percentage')
+		fields = ('driver_cargo','dri','percentage')
 		labels = {
-			'shipment': "Shipment Number",
+			'driver_cargo': "Shipment Number",
 			'dri': "Driver",
 			'percentage': "Percentage"
 		}
 		widgets = {
-			'shipment': forms.NumberInput(attrs={'class':'form-control','required': 'True' }),
 			'dri':  forms.Select(attrs={'class':'form-control','required': 'True','name':'name'}),
-			'percentage': forms.NumberInput(attrs={'class':'form-control','required': 'True'}),
+			'percentage': forms.NumberInput(attrs={'class':'form-control', 'required': 'False'}),
 		}

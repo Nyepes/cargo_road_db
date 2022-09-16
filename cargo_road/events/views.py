@@ -1,8 +1,10 @@
+import time
 from django.shortcuts import render, redirect
 from .forms import Driver2XCargoForm, DriverForm, Driver1XCargoForm, TruckForm, CargoForm, FedexSettlementForm
 from .models import Cargo, Driver, DriverXCargo, Truck, FedexSettlement
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def home(request):
 	print(Cargo.objects.first())
@@ -10,20 +12,32 @@ def home(request):
 	return render(request, 'home.html',{})
 @login_required
 def view_cargo (request):
-	cargoList = Cargo.objects.all()
+	p = Paginator(Cargo.objects.all().order_by('id'), 25)
+	page = request.GET.get('page')
+	cargoList = p.get_page(page)
 	return render(request, 'lists/view_cargo.html', {'cargoList':cargoList})
 @login_required
 def add_cargo (request):
 	if request.method == 'POST':
 		form = CargoForm(request.POST)
+		print(form.data)
 		if form.is_valid():
 			cargo = form.save()
-			form1 = Driver1XCargoForm(request.POST, initial={'shipment':cargo})
-			form2 = Driver2XCargoForm(request.POST, initial={'shipment':cargo})
-			if form1.is_valid() and form2.is_valid():
-				form1.save()
-				form2.save()
-				return redirect("home")
+			print(cargo.id)
+			form1 = Driver1XCargoForm(request.POST)
+			form2 = Driver2XCargoForm(request.POST)
+			form1.is_valid()
+			form2.is_valid()
+			try:
+				dc1 = DriverXCargo(driver_cargo = cargo, dri = form1.clean()['dri'], percentage = form1.clean()['percentage']) 
+				dc2 = DriverXCargo(driver_cargo = cargo, dri = form2.clean()['dri'], percentage = form2.clean()['percentage']) 
+				dc1.save()
+				dc2.save()
+				return redirect('home')
+			except:
+				messages.success(request, str(form1.errors))
+		else:
+			messages.success(request, str(form.errors))
 	form1 = Driver1XCargoForm(request.POST)
 	form2 = Driver2XCargoForm(request.POST)
 	form = CargoForm(request.POST)
@@ -96,6 +110,8 @@ def update_truck(request, truck_id):
 			form.save()
 			return redirect('home')
 	return render (request,'create/add_truck.html',{'form':form})
-
-
+@login_required
+def detail_cargo(request, cargo_id):
+	cargo = Cargo.objects.get(pk = cargo_id)
+	return render(request, 'detail/cargo.html', {'cargo':cargo})
 

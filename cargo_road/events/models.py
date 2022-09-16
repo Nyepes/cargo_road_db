@@ -44,10 +44,10 @@ class DriverSettlement (models.Model):
 		return str(self.settlement_drivers)
 
 class Cargo (models.Model):
-	shipment = models.PositiveIntegerField(primary_key=True)
+	shipment = models.PositiveBigIntegerField(unique=True)
 	truck = models.ForeignKey(Truck, on_delete = models.CASCADE) #hablar con papi sobre on delete
-	driver_settlement = models.ForeignKey(DriverSettlement, on_delete = models.CASCADE)
-	fedex_settlement = models.ForeignKey(FedexSettlement,   on_delete = models.CASCADE)
+	driver_settlement = models.ForeignKey(DriverSettlement, on_delete = models.CASCADE,  blank = True, null=True)
+	fedex_settlement = models.ForeignKey(FedexSettlement,   on_delete = models.CASCADE, blank = True, null=True)
 	description = models.CharField( max_length = 300) #Change max length
 	pickup_date = models.DateField()
 	delivery_date = models.DateField()
@@ -73,6 +73,6 @@ class Driver (models.Model):
 		return self.name + " " + self.last_name + " | " + self.nickname
 
 class DriverXCargo(models.Model):
-	shipment = models.ForeignKey(Cargo, on_delete = models.CASCADE)
+	driver_cargo = models.ForeignKey(Cargo, on_delete = models.CASCADE)
 	dri = models.ForeignKey(Driver, on_delete = models.CASCADE)
 	percentage = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])

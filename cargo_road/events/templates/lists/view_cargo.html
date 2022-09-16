@@ -1,25 +1,41 @@
-{% extends 'base.html' %}
-
-{% block content %}
-	<h1>View Cargo</h1>
-	<br>
-	<br>
-		{% for cargo in cargoList %}
-		<div class="card">
-		 <div class="card-header"> {{cargo.shipment}}
-		  </div>
-		  <div class="card-body">
-		    <h5 class="card-title">{{cargo.truck}}</h5>
-		    <p class="card-text">{{cargo.pickup_date}}</p>
-		    <p>
-				<strong>Fedex Settlement: </strong>{{cargo.fedex_settlement}}<br>
-				<strong>Driver Settlement: </strong> {{cargo.driver_settlement}}<br>
-				<strong>Load miles: </strong> {{cargo.load_miles}}<br>
-				<strong>Loaded Income: </strong> {{cargo.loaded_income}}<br>			
-		    </p>
-		    <a href="#" class="btn btn-primary">More info</a>
-			</div>
-		 	</div>
-		</br>
-		{% endfor %}	
-{% endblock %}
+{% extends 'base.html'%}
+{%block content%}
+<h2>Cargo</h2>
+</br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+	  <th scope="col">Shipment</th>
+      <th scope="col">Pickup Date</th>
+      <th scope="col">Loaded Miles</th>
+      <th scope="col">Loaded Income</th>
+      <th scope="col">Fedex Settlement</th>
+    </tr>
+  </thead>
+    <tbody>
+      {%for cargo in cargoList%}
+      <tr style="transform: rotate(0);">
+      <th scope="row"><a href="{%url 'detail_cargo' cargo.id%}" class="stretched-link">{{cargo.shipment}}</a></th>
+        <td>{{cargo.pickup_date}}</td>
+        <td>{{cargo.load_miles}}</td>
+        <td>{{cargo.loaded_income}}</td>
+        <td>{{cargo.fedex_settlement}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      {%if cargoList.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">&laquo</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{cargoList.previous_page_number}}">{{cargoList.previous_page_number}}</a></li>
+      {%endif%}
+      <li class="page-item active"><a class="page-link" href="#">{{cargoList.number}}</a></li>
+      {%if cargoList.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{cargoList.next_page_number}}">{{cargoList.next_page_number}}</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{cargoList.num_pages}}">&raquo</a></li>
+      {%endif%}
+    </ul>
+    </nav>
+    </br>
+{%endblock%}

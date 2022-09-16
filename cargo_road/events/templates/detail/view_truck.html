@@ -22,7 +22,7 @@
     <tbody>
       {%for cargo in cargos%}
       <tr style="transform: rotate(0);">
-      <th scope="row"><a href="#" class="stretched-link">{{cargo.pickup_date}}</a></th>
+      <th scope="row"><a href="{%url 'detail_cargo' cargo.id%}" class="stretched-link">{{cargo.pickup_date}}</a></th>
         <td>{{cargo.load_miles}}</td>
         <td>{{cargo.loaded_income}}</td>
         <td>{{cargo.fedex_settlement}}</td>

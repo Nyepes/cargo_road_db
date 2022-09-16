@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{%block content%}
+<h2>Shipment: {{cargo.shipment}}</h2>
+</br>
+<h6>{{cargo.pickup_date}}</h6>
+<h6><b>Fedex Settlement </b>{{cargo.fedex_settlement}}</h6>
+<h6><b>Fedex Settlement </b>{{cargo.fedex_settlement}}</h6>
+</br>
+</br></br>
+<!-- <h4>Cargo</h4>
+<table class="table table-hover">
+    <tbody>
+      {%for cargo in cargos%}
+      <tr style="transform: rotate(0);">
+      <th scope="row"><a href="{%url 'detail_driver' driver.id %}" class="stretched-link">{{driver.nickname}}</a></th>
+        <td>{{driver.name}}</td>
+        <td>{{driver.last_name}}</td>
+        <td>{{driver.driver_id_fedex}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table> --> 
+{%endblock%}
